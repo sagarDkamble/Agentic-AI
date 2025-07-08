@@ -1,8 +1,8 @@
 streamlit
 langchain
+langchain-community
 openai
 google-search-results
-langchain-community
 markdown2
 xhtml2pdf
-
+arxiv
