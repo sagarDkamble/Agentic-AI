@@ -1,0 +1,7 @@
+streamlit
+langchain
+openai
+google-search-results
+langchain-community
+markdown2
+xhtml2pdf
