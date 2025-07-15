@@ -1,4 +1,4 @@
-phidata 
-yfinance 
+phidata
+yfinance
 openai
 streamlit
