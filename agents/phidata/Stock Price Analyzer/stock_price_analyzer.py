@@ -10,4 +10,15 @@ finance_agent = Agent(
     show_tool_calls=True,
     markdown=True,
 )
-finance_agent.print_response("Summarize analyst recommendations for NVDA", stream=True)
+#finance_agent.print_response("Summarize analyst recommendations for NVDA", stream=True)
+
+import streamlit as st
+
+st.title("Finance Agent")
+
+user_input = st.text_input("Enter your finance query:")
+
+if user_input:
+  # The finance_agent is already defined in the preceding code
+  response = finance_agent.run(user_input)
+  st.markdown(response)
