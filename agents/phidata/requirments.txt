@@ -1,4 +1,0 @@
-phidata 
-yfinance 
-openai
-streamlit
