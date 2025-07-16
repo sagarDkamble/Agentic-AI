@@ -44,7 +44,7 @@ st.markdown("Enter a stock name.")
 
 query = st.text_input("Enter your query", "Summarize analyst recommendations for NVDA")
 
-if st.button("Run Agent") and topic_input.strip() != "":
+if st.button("Run Agent") and query.strip() != "":
     with st.spinner("Getting response from Finance Agent..."):
         try:
             response = finance_agent.run(query)
