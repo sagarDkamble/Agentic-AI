@@ -2,3 +2,5 @@ phidata
 yfinance
 openai
 streamlit
+xhtml2pdf
+markdown2
