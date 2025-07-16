@@ -31,10 +31,13 @@ query = st.text_input("Enter your query", "Summarize analyst recommendations for
 
 if st.button("Run Agent"):
     with st.spinner("Getting response from Finance Agent..."):
-        response = finance_agent.print_response(query)
+        response = finance_agent.run(query)
         output = response.output
-        st.markdown("### 📋 Agent Response")
-        st.markdown(output)
+        if response is None:
+            st.error("❌ The agent did not return a response. Check your API key or query.")
+        else:
+            st.markdown("### 📋 Agent Response")
+            st.markdown(output)
 
         # Save response to PDF
         filename = f"Finance_Agent_Output_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
