@@ -31,7 +31,7 @@ query = st.text_input("Enter your query", "Summarize analyst recommendations for
 
 if st.button("Run Agent"):
     with st.spinner("Getting response from Finance Agent..."):
-        response = finance_agent.run(query)
+        response = finance_agent.print_response(query)
         output = response.output
         st.markdown("### 📋 Agent Response")
         st.markdown(output)
