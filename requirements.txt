@@ -2,3 +2,4 @@ streamlit
 reportlab
 openai
 phidata
+yfinance
