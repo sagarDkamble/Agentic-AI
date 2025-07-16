@@ -1,6 +1,8 @@
-phidata
-yfinance
-openai
-streamlit
-xhtml2pdf
-markdown2
+streamlit>=1.28.0
+phidata>=2.4.0
+yfinance>=0.2.18
+openai>=1.0.0
+xhtml2pdf>=0.2.11
+markdown2>=2.4.10
+pandas>=2.0.0
+numpy>=1.24.0
