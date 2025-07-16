@@ -4,6 +4,10 @@ from reportlab.pdfgen import canvas
 import datetime
 import os
 
+import markdown2
+from xhtml2pdf import pisa
+
+
 from phi.agent import Agent
 from phi.model.openai import OpenAIChat
 from phi.tools.yfinance import YFinanceTools
@@ -24,38 +28,41 @@ finance_agent = Agent(
     markdown=True,
 )
 
+
+
+# PDF generation using xhtml2pdf
+def generate_pdf(markdown_text, filename="paper.pdf"):
+    html = markdown2.markdown(markdown_text)
+    pdf_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    pisa.CreatePDF(html, dest=pdf_file)
+    return pdf_file.name
+
 # Streamlit UI
-st.title("📈 Stock Analysis & Recommendation Agent")
+st.set_page_config(page_title="📈 Stock Analysis & Recommendation Agent", layout="wide")
+st.title("📄 stock analysis Agent")
+st.markdown("Enter a stock name.")
 
 query = st.text_input("Enter your query", "Summarize analyst recommendations for NVDA")
 
-if st.button("Run Agent"):
+if st.button("Run Agent") and topic_input.strip() != "":
     with st.spinner("Getting response from Finance Agent..."):
-        response = finance_agent.run(query)
-        output = response.content
-        st.markdown("### 📋 Agent Response")
-        st.markdown(output)
+        try:
+            response = finance_agent.run(query)
+            output = response.content       
+            
+            st.subheader("📋 Agent Response")
+            st.markdown(output)
 
-        # Save response to PDF
-        filename = f"Finance_Agent_Output_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
-        pdf_path = f"{filename}"
-
-        c = canvas.Canvas(pdf_path, pagesize=letter)
-        width, height = letter
-        y = height - 50
-        for line in output.split('\n'):
-            if y < 40:
-                c.showPage()
-                y = height - 50
-            c.drawString(40, y, line[:110])
-            y -= 15
-        c.save()
-
-        # PDF download button
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="📥 Download Response as PDF",
-                data=f,
-                file_name=filename,
-                mime="application/pdf"
-            )
+            # Save to PDF and offer download
+            pdf_path = generate_pdf(output)
+            with open(pdf_path, "rb") as f:
+                st.download_button(
+                    label="📥 Download as PDF",
+                    data=f,
+                    file_name="Stock Analysis report.pdf",
+                    mime="application/pdf"
+                )
+        except Exception as e:
+            st.error(f"❌ Error: {e}")
+else:
+    st.info("🔍 Enter a stock name and click on  'Run Agent'")
