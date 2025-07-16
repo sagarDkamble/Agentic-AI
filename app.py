@@ -32,7 +32,7 @@ query = st.text_input("Enter your query", "Summarize analyst recommendations for
 if st.button("Run Agent"):
     with st.spinner("Getting response from Finance Agent..."):
         response = finance_agent.run(query)
-        output = response.output
+        output = response
         if response is None:
             st.error("❌ The agent did not return a response. Check your API key or query.")
         else:
