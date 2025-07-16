@@ -3,3 +3,5 @@ reportlab
 openai
 phidata
 yfinance
+markdown2
+xhtml2pdf
