@@ -1,8 +1,4 @@
-streamlit==1.28.0
-phidata==0.9.10
-yfinance==0.2.18
-openai==1.16.2
-xhtml2pdf==0.2.11
-markdown2==2.4.10
-pandas==2.0.0
-numpy==1.24.0
+streamlit
+reportlab
+phidata
+openai
